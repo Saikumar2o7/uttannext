@@ -111,7 +111,7 @@ const StepTitle = styled.h3`
 `;
 
 const StepDescription = styled.p`
-    font-size: 14px;
+    font-size: 16px;
     color: #555;
     max-width: 250px;
     min-height: 0px;

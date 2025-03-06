@@ -247,12 +247,12 @@ const SolarCalculator = () => {
                         </SummaryItem>
                     </FirstSummarySection>
                 </TableWrapper>
-                <SummaryItem className="buttons">
-                    <SureyButton>
+                <SummaryItemButton className="buttons">
+                    {/* <SureyButton>
                         <StyledIcon src={Upload.src} alt="uploadIcon" />Self Assisted Survey Video
-                    </SureyButton>
+                    </SureyButton> */}
                     <ProceedButton onClick={() => setBooksiteVisit(true)}>Book Your Site Visit</ProceedButton>
-                </SummaryItem>
+                </SummaryItemButton>
                 <BookSiteVisitModal open={bookSiteVisitModal} onClose={handleCloseModal} />
             </Container>
 
@@ -377,6 +377,12 @@ margin:20px;
 }
 `;
 
+const SummaryItemButton = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin : 1rem;
+`
+
 const SummaryText = styled.p`
   margin:0;
   padding:0;
@@ -414,24 +420,25 @@ const ProceedButton = styled.button`
   flex-shrink: 0;
   font-weight:600;
 `;
-const SureyButton = styled.button`
-  display: flex;
-  gap:20px;
-  justify-content: center;
-  text-align: center;
-  background-color: ${(props) => props.theme.colors.primaryBackground};
-  color: ${(props) => props.theme.buttons.secondaryBackground};
-  padding: 10px 80px;
-  border-radius: 50px;
-  border: none;
-  flex-shrink: 0;
-  font-weight:600;
-  border:2px solid${(props) => props.theme.buttons.secondaryBackground};
-`;
+
+// const SureyButton = styled.button`
+//   display: flex;
+//   gap:20px;
+//   justify-content: center;
+//   text-align: center;
+//   background-color: ${(props) => props.theme.colors.primaryBackground};
+//   color: ${(props) => props.theme.buttons.secondaryBackground};
+//   padding: 10px 80px;
+//   border-radius: 50px;
+//   border: none;
+//   flex-shrink: 0;
+//   font-weight:600;
+//   border:2px solid${(props) => props.theme.buttons.secondaryBackground};
+// `;
 
 const StyledIcon = styled.img`
-width:15px;
-height:15px;
+width:65px;
+height:65px;
 &.rupee{
 text-align:center;
 margin-bottom:-8px;

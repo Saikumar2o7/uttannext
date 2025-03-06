@@ -1,12 +1,12 @@
-'use client'; 
+'use client';
 
 import styled from "styled-components";
 import { forwardRef, useState } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 
 const HomeThirdSection = forwardRef<HTMLDivElement>((_, ref) => {
   const [electricityBill, setElectricityBill] = useState<string>('');
-  const router = useRouter(); 
+  const router = useRouter();
 
   const consumerCategories = [
     {
@@ -47,15 +47,21 @@ const HomeThirdSection = forwardRef<HTMLDivElement>((_, ref) => {
                 onClick={() => setSelectedCard(item.heading)}
               >
                 <h2>{item.heading}</h2>
-                <p>{item.description}</p>
+                <PText>{item.description}</PText>
               </SelectionBox>
             ))}
           </Cards>
+          <Label>
+            <Span>Pincode</Span>*
+          </Label>
           <InputWrapper>
             <Icon src="/assets/Icons/Location.png" alt="Location" />
             <StyledInput placeholder="Your Location" />
-            <DetectButton>Detect</DetectButton>
+            {/* <DetectButton>Detect</DetectButton> */}
           </InputWrapper>
+          <Label>
+            <Span>Electricity bill</Span>*
+          </Label>
           <InputWrapper>
             <StyledInput
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setElectricityBill(e.target.value)}
@@ -72,6 +78,11 @@ const HomeThirdSection = forwardRef<HTMLDivElement>((_, ref) => {
 });
 
 export default HomeThirdSection;
+
+const PText = styled.p`
+  font-size: 1rem !important;
+  font-weight: light !important;
+`
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.colors.secondaryBackground};
@@ -134,6 +145,23 @@ const Cards = styled.div`
     padding: 20px 0;
   }
 `;
+
+const Label = styled.div`
+  font-style : Poppins;
+  display: flex;
+  margin-left: 2.3rem;
+  margin-top: 10px;
+  gap: 4px;
+  color: #CA1407;
+  font-size: 1rem;
+  font-weight : 600
+`;
+
+const Span = styled.div`
+  color: #22242F;
+  font-weight : 600;
+  text-size : 1rem
+` 
 
 const SelectionBox = styled.div<{ selected: boolean }>`
   border-radius: 25px;
@@ -215,6 +243,7 @@ const InputWrapper = styled.div`
   border-radius: 50px;
   border: 1px solid #e5e5eb;
   padding: 10px 30px;
+  margin-top : 2px;
 `;
 
 const Icon = styled.img`
@@ -231,22 +260,23 @@ const StyledInput = styled.input`
   font-size: 16px;
 `;
 
-const DetectButton = styled.button`
-  && {
-    margin: 0;
-    padding: 0;
-    font-size: 17px;
-    font-weight: 600;
-    border: none;
-    background-color: transparent;
-    color: ${(props) => props.theme.buttons.secondaryBackground};
-  }
-`;
+// const DetectButton = styled.button`
+//   && {
+//     margin: 0;
+//     padding: 0;
+//     font-size: 17px;
+//     font-weight: 600;
+//     border: none;
+//     background-color: transparent;
+//     color: ${(props) => props.theme.buttons.secondaryBackground};
+//   }
+// `;
 
 const EstimationButton = styled.button`
   && {
     width: 100%;
     height: 60px;
+    margin-top: 15px;
     padding: 0px 60px;
     background-color: ${(props) => props.theme.buttons.secondaryBackground};
     border: none;

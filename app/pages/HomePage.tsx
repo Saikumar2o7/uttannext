@@ -40,7 +40,7 @@ export default function HomePage() {
                         <HeadingText>
                             Solar is <span>80%</span> cheaper! We make switching easy
                         </HeadingText>
-                        <p>Earn unlimited cash rewards by introducing Jiraaf to your industry colleagues and friends.</p>
+                        <PText>Earn unlimited cash rewards by introducing Jiraaf to your industry colleagues and friends.</PText>
                         <ButtonsWrapper>
                             <StyledButton
                                 $backgroundColor={theme.buttons.secondaryBackground}
@@ -111,6 +111,7 @@ const HeadingText = styled.h2`
     margin: 0;
     font-size: 46px;
     margin-top: 35px;
+    margin-bottom : 10px;
     span {
         color: ${(props) => props.theme.colors.instructionText};
     }
@@ -142,3 +143,6 @@ const StyledButton = styled.button<StyledButtonProps>`
     cursor: pointer;
 `;
 
+const PText = styled.p`
+  font-size: 1.1rem !important;
+`

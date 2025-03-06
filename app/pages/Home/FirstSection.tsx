@@ -11,42 +11,42 @@ const HomeFirstSection = () => {
                     <StyledIcon src="/assets/Icons/HomeSection1Icon1.png" alt="Reduce Energy Bills" />
                     <TextContainer>
                         <HeadingText>Reduce/Eliminate Energy Bills</HeadingText>
-                        <p>Save money by reducing or even eliminating your electricity costs with solar power.</p>
+                        <PText>Save money by reducing or even eliminating your electricity costs with solar power.</PText>
                     </TextContainer>
                 </Item>
                 <Item>
                     <StyledIcon src="/assets/Icons/HomeSection1Icon2.png" alt="Safe Investment" />
                     <TextContainer>
                         <HeadingText>Safe Investment & Long term Earnings</HeadingText>
-                        <p>Enjoy long-term savings and reliable financial returns on your solar setup.</p>
+                        <PText>Enjoy long-term savings and reliable financial returns on your solar setup.</PText>
                     </TextContainer>
                 </Item>
                 <Item>
                     <StyledIcon src="/assets/Icons/HomeSection1Icon3.png" alt="Low Maintenance" />
                     <TextContainer>
                         <HeadingText>Low Maintenance, High Efficiency</HeadingText>
-                        <p>Solar panels require little upkeep, giving you stress-free energy for years.</p>
+                        <PText>Solar panels require little upkeep, giving you stress-free energy for years.</PText>
                     </TextContainer>
                 </Item>
                 <Item>
                     <StyledIcon src="/assets/Icons/HomeSection1Icon4.png" alt="Energy Independence" />
                     <TextContainer>
                         <HeadingText>Energy Independence</HeadingText>
-                        <p>Generate your own electricity and reduce dependence on power companies.</p>
+                        <PText>Generate your own electricity and reduce dependence on power companies.</PText>
                     </TextContainer>
                 </Item>
                 <Item>
                     <StyledIcon src="/assets/Icons/HomeSection1Icon5.png" alt="Eco Friendly" />
                     <TextContainer>
                         <HeadingText>Eco-Friendly & Sustainable</HeadingText>
-                        <p>Go green! Cut carbon emissions and help create a cleaner planet.</p>
+                        <PText>Go green! Cut carbon emissions and help create a cleaner planet.</PText>
                     </TextContainer>
                 </Item>
                 <Item>
                     <StyledIcon src="/assets/Icons/HomeSection1Icon6.png" alt="Affordable" />
                     <TextContainer>
                         <HeadingText>Affordable & Cost-Effective</HeadingText>
-                        <p>Solar energy is now more budget-friendly, making it a smart choice for homes and businesses.</p>
+                        <PText>Solar energy is now more budget-friendly, making it a smart choice for homes and businesses.</PText>
                     </TextContainer>
                 </Item>
             </ItemsContainer>
@@ -112,6 +112,10 @@ const TextContainer = styled.div`
 const HeadingText = styled.h2`
     margin: 0;
     padding: 0;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
 `;
+
+const PText = styled.p`
+  font-size: 13px !important;
+`

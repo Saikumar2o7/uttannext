@@ -3,16 +3,11 @@
 import { Close } from "@mui/icons-material";
 import { IconButton, Modal } from "@mui/material";
 import styled, { useTheme } from "styled-components";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState } from "react";
-import { useRouter } from "next/navigation"; 
-
-interface TextProps {
-    $textColor : string;
-    $fontSize : string
-}
+import { useRouter } from "next/navigation";
 
 interface BookSiteViewModalProps {
   open: boolean;
@@ -20,56 +15,101 @@ interface BookSiteViewModalProps {
 }
 
 const BookSiteVisitModal: React.FC<BookSiteViewModalProps> = ({ open, onClose }) => {
+  const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
+  const [email, setEmail] = useState("")
+  const [zipCode, setZipCode] = useState("")
+  const [address, setAddress] = useState("")
+  const [showError, setShowError] = useState(false)
   const theme = useTheme();
-  const router = useRouter(); 
+  const router = useRouter();
 
-  const [selectedSlot, setSelectedSlot] = useState("");
+  // const [selectedSlot, setSelectedSlot] = useState("");
 
-  const timeSlots = [
-    "10:00 AM - 10:30 AM",
-    "11:00 AM - 11:30 AM",
-    "12:00 PM - 12:30 PM",
-    "1:00 PM - 1:30 PM",
-    "2:00 PM - 2:30 PM",
-    "3:00 PM - 3:30 PM",
-    "4:00 PM - 4:30 PM",
-    "5:00 PM - 5:30 PM",
-    "6:00 PM - 6:30 PM",
-  ];
+  // const timeSlots = [
+  //   "10:00 AM - 10:30 AM",
+  //   "11:00 AM - 11:30 AM",
+  //   "12:00 PM - 12:30 PM",
+  //   "1:00 PM - 1:30 PM",
+  //   "2:00 PM - 2:30 PM",
+  //   "3:00 PM - 3:30 PM",
+  //   "4:00 PM - 4:30 PM",
+  //   "5:00 PM - 5:30 PM",
+  //   "6:00 PM - 6:30 PM",
+  // ];
 
   const handleBook = () => {
-    router.push('/Vendor'); 
+    if (!name || !phone || !address || !email || !zipCode) {
+      setShowError(true)
+    } else {
+      setShowError(false)
+      router.push('/Vendor');
+    }
   };
 
   return (
     <StyledModal open={open} onClose={onClose}>
       <div className="modal-content">
-        <StyledCloseButton aria-label="close" onClick={onClose}>
-          <StyledClose />
-        </StyledCloseButton>
+        <Header>
+          <HeaderContainer>
+          <Title>Book Feasibility Test</Title>
+          <StyledCloseButton aria-label="close" onClick={onClose}>
+            <StyledClose />
+          </StyledCloseButton>
+          </HeaderContainer>
+        </Header>
         <Body>
           <InputSection>
             <InputItem>
-              <Text $fontSize="12px" $textColor={theme.colors.primaryText}>Address</Text>
-              <StyledInput placeholder="Address" />
+              <Label>
+                <Span>Name</Span>*
+              </Label>
+              <StyledInput placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} $error={!name && showError} />
             </InputItem>
             <InputItem>
-              <Text $fontSize="12px" $textColor={theme.colors.primaryText}>Pin Code</Text>
-              <StyledInput placeholder="Pin Code" />
+              <Label>
+                <Span>Phone Number</Span>*
+              </Label>
+              <StyledInput placeholder="Phone number" value={phone} onChange={(e) => setPhone(e.target.value)} $error={!phone && showError} />
+            </InputItem>
+            <InputItem>
+              <Label>
+                <Span>Email</Span>*
+              </Label>
+              <StyledInput placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} $error={!email && showError} />
+            </InputItem>
+            <InputItem>
+              <Label>
+                <Span>PinCode</Span>*
+              </Label>
+              <StyledInput placeholder="PinCode" value={zipCode} onChange={(e) => setZipCode(e.target.value)} $error={!zipCode && showError} />
+            </InputItem>
+            <InputItem>
+              <Label>
+                <Span>Address</Span>*
+              </Label>
+              <StyledInput value={address} onChange={(e) => setAddress(e.target.value)} $error={!address && showError} />
+            </InputItem>
+            <InputItem>
+              <Label>
+                <Span>Notes</Span>
+              </Label>
+              <StyledTextArea placeholder="Add notes" />
             </InputItem>
           </InputSection>
+
           <InputSection>
             <InputItem>
-              <Text $fontSize="12px" $textColor={theme.colors.primaryText}>Date</Text>
+              {/* <Text $fontSize="12px" $textColor={theme.colors.primaryText}>Date</Text>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <StyledDatePicker
                   format="DD-MM-YYYY"
                   label="Pickup Date"
                 />
-              </LocalizationProvider>
+              </LocalizationProvider> */}
             </InputItem>
           </InputSection>
-          <Text className="start" $fontSize="12px" $textColor={theme.colors.primaryText}>Pick a Timeslot</Text>
+          {/* <Text className="start" $fontSize="12px" $textColor={theme.colors.primaryText}>Pick a Timeslot</Text>
           <TimeSlotContainer>
             {timeSlots.map((slot) => (
               <TimeSlotButton
@@ -80,7 +120,12 @@ const BookSiteVisitModal: React.FC<BookSiteViewModalProps> = ({ open, onClose })
                 {slot}
               </TimeSlotButton>
             ))}
-          </TimeSlotContainer>
+          </TimeSlotContainer> */}
+          {showError &&
+            <ErrorMessage>
+              One or more field(s) are missing
+            </ErrorMessage>
+          }
           <BookButton onClick={handleBook}>Book</BookButton>
         </Body>
       </div>
@@ -110,12 +155,38 @@ const StyledModal = styled(Modal)`
   }
 `;
 
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 23px 50px;
+  align-items:center;
+  width: 100%;
+  padding : 0 20px;
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 81%;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid ${(props)=> props.theme.colors.lightBorder}
+`
+
+const Title = styled.p`
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: ${(props) => props.theme.colors.primaryText};
+`;
+
 const StyledCloseButton = styled(IconButton)`
   && {
-    left: 580px;
+    padding: 0;
+    margin: 0;
     font-size: 8px !important;
     display: flex;
-    top: 5px;
     border: 1px solid ${(props) => props.theme.colors.lightBorder} !important;
     border-radius: 100%;
     width: 18px;
@@ -140,102 +211,148 @@ const Body = styled.div`
 `;
 
 const InputSection = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  margin-left: 80px;
+  grid-template-columns: repeat(2, 220px);
+  gap: 25px; 
   width: 100%;
-`;
-
-const StyledInput = styled.input`
-  && {
-    width: 265px;
-    height: 38px;
-    border: 1px solid ${(props) => props.theme.colors.lightBorder};
-    padding: 0px 30px;
-    border-radius: 50px;
-    background-color: ${(props) => props.theme.colors.secondaryBackground};
+  
+  & > :nth-child(5),
+  & > :nth-child(6) {
+    grid-column: 1 / -1;
   }
 `;
+
+const ErrorMessage = styled.div`
+  color : #CA1407;
+  font-size: .8rem;
+  margin-top: 1.2rem;
+`
+
+
+const StyledInput = styled.input<{ $error?: boolean }>`
+  && {
+    width: 100%;
+    height: 38px;
+    border: 1px solid ${(props) => props.$error ? "#CA1407" : props.theme.colors.lightBorder};
+    padding: 0px 22px;
+    font-size: 14px; 
+    border-radius : 0.5rem;
+    background-color: ${(props) => props.theme.colors.primaryBackground};
+  }
+`;
+
+const StyledTextArea = styled.textarea`
+  && {
+    width: 100%;
+    height: 100px;
+    padding: 22px;
+    border: 1px solid ${(props) => props.theme.colors.lightBorder};
+    border-radius: 0.5rem;
+    background-color: ${(props) => props.theme.colors.secondaryBackground};
+    resize: none; 
+    font-family: inherit;
+    font-size: 14px;
+    margin-bottom: 1rem;
+  }
+`;
+
 
 const InputItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 10px;
+  width: 100%; 
 `;
 
-const Text = styled.p<TextProps>`
-  padding: 0;
-  margin: 0;
-  margin-left: 10px;
-  margin-top: 15px;
-  color: ${(props) => props.$textColor};
-  font-size: ${(props) => props.$fontSize};
-
-  &.start {
-    margin-right: auto;
-  }
-`;
-
-const StyledDatePicker = styled(DatePicker)`
-  && {
-    .MuiOutlinedInput-root {
-      background-color: ${(props) => props.theme.colors.secondaryBackground};
-      width: 265px;
-      height: 38px;
-      padding: 0px 30px;
-      border: 1px solid ${(props) => props.theme.colors.lightBorder};
-      border-radius: 50px;
-    }
-
-    .MuiInputBase-root {
-      height: 38px;
-      width: 265px;
-    }
-
-    .MuiFormLabel-root {
-      text-align: center;
-      margin-top: -6px;
-      font-size: 14px;
-      margin-left: -10px;
-      width: 100%;
-    }
-  }
-`;
-
-const TimeSlotContainer = styled.div`
+const Label = styled.div`
+  font-style : Poppins;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid ${(props) => props.theme.colors.lightBorder};
+  gap: 2px;
+  color: #CA1407;
+  font-size: 12px;
 `;
 
-const TimeSlotButton = styled.button<{ selected: boolean }>`
-  padding: 10px 15px;
-  width: 165px;
-  border: 1px solid ${(props) => props.theme.buttons.secondaryBackground};
-  border-radius: 20px;
-  background: ${(props) => (props.selected ? props.theme.buttons.primaryBackground : "transparent")};
-  color: ${(props) => (props.selected ? props.theme.colors.secondaryText : props.theme.buttons.secondaryBackground)};
-  cursor: pointer;
-  font-size: 14px;
-  transition: 0.3s;
-  outline: none;
+const Span = styled.div`
+  color: #22242F;
+  font-weight : 550;
+  text-size : 1rem
+`
 
-  &:hover {
-    background: ${(props) => (props.selected ? "#1976d2" : "#e3f2fd")};
-  }
-`;
+
+// const Text = styled.p`
+//   font-style : poppins;
+//   padding: 0;
+//   margin: 0;
+//   font-size: 12px;
+//   margin-top: 15px;
+//   font-weight : 600;
+//   color: #22242F;
+//   &.start {
+//     margin-right: auto;
+//   }
+// `;
+
+// const StyledDatePicker = styled(DatePicker)`
+//   && {
+//     .MuiOutlinedInput-root {
+//       background-color: ${(props) => props.theme.colors.secondaryBackground};
+//       width: 265px;
+//       height: 38px;
+//       padding: 0px 30px;
+//       border: 1px solid ${(props) => props.theme.colors.lightBorder};
+//       border-radius: 50px;
+//     }
+
+//     .MuiInputBase-root {
+//       height: 38px;
+//       width: 265px;
+//     }
+
+//     .MuiFormLabel-root {
+//       text-align: center;
+//       margin-top: -6px;
+//       font-size: 14px;
+//       margin-left: -10px;
+//       width: 100%;
+//     }
+//   }
+// `;
+
+// const TimeSlotContainer = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: center;
+//   gap: 20px;
+//   margin-top: 20px;
+//   margin-bottom: 20px;
+//   padding-bottom: 20px;
+//   border-bottom: 1px solid ${(props) => props.theme.colors.lightBorder};
+// `;
+
+// const TimeSlotButton = styled.button<{ selected: boolean }>`
+//   padding: 10px 15px;
+//   width: 165px;
+//   border: 1px solid ${(props) => props.theme.buttons.secondaryBackground};
+//   border-radius: 20px;
+//   background: ${(props) => (props.selected ? props.theme.buttons.primaryBackground : "transparent")};
+//   color: ${(props) => (props.selected ? props.theme.colors.secondaryText : props.theme.buttons.secondaryBackground)};
+//   cursor: pointer;
+//   font-size: 14px;
+//   transition: 0.3s;
+//   outline: none;
+
+//   &:hover {
+//     background: ${(props) => (props.selected ? "#1976d2" : "#e3f2fd")};
+//   }
+// `;
 
 const BookButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20%;
+  width: 35%;
   padding: 10px 20px;
   background: ${(props) => props.theme.buttons.secondaryBackground};
   color: white;
@@ -244,8 +361,8 @@ const BookButton = styled.button`
   border-radius: 20px;
   cursor: pointer;
   transition: 0.3s;
-  margin-bottom: 20px;
-
+  margin-bottom : 1rem;
+  margin-top: .3rem;
   &:hover {
     background: #1976d2;
   }
