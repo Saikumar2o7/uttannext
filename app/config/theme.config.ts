@@ -1,0 +1,1 @@
+export const CURRENT_THEME :string = process.env.NEXT_PUBLIC_APP_THEME as string ;
