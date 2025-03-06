@@ -167,7 +167,7 @@ const Quotation = () => {
                             and obtain a permit before installing a rooftop solar system. Get started today to ensure a
                             smooth and hassle-free installation process!</TextBox>
                     </div>
-                    <ProceedButton onClick={()=> navigateToMeter}>Apply For Permit</ProceedButton>
+                    <ProceedButton onClick={navigateToMeter}>Apply For Permit</ProceedButton>
                 </FooterSection>
             </Container>
         </>

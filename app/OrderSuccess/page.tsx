@@ -3,61 +3,44 @@
 import styled from "styled-components";
 import { useRouter } from "next/navigation";
 import Success from "../../public/assets/success.png"
-import { Modal } from "@mui/material";
+import Header from "../components/Header/Header";
 
-
-interface SuccessModalProps {
-    open: boolean;
-    onClose: () => void
-}
-
-const SuccessModal: React.FC<SuccessModalProps> = ({ open, onClose }) => {
+const OrderSuccess = () => {
     const router = useRouter();
 
-    const handleSubsidy = () => {
-        router.push("/Subsidy")
+    const navigateToHome = () => {
+        router.push("/HomePage")
     }
 
     return (
         <>
-            <StyledModal open={open} onClose={onClose}>
+            <Header />
+            <Container>
                 <Card>
                     <IconWrapper>
-                        <StyledImage src={Success.src} alt="SuccessImg" />
+                        <StyledImage src={Success.src} />
                     </IconWrapper>
                     <Title>Order Placed Successfully!</Title>
-                    <Message>Your Subsidy has Been Applied!</Message>
-                    {/* <OrderID>Your Order ID <strong>#24465</strong> is confirmed</OrderID> */}
-                    <Button onClick={handleSubsidy}>View Subsidy</Button>
+                    <Message>Thank you for choosing Vikram Solar.</Message>
+                    <OrderID>Your Order ID <strong>#24465</strong> is confirmed</OrderID>
+                    <Button onClick={navigateToHome}>Go Back Home</Button>
                 </Card>
-            </StyledModal>
+            </Container>
         </>
 
     );
 };
 
-export default SuccessModal;
+export default OrderSuccess;
 
-const StyledModal = styled(Modal)`
-&& {
-display: flex;
-justify-content: center;
-font-family:${(props) => props.theme.fontFamily};
-.modal-content {
-background-color: ${(props) => props.theme.colors.primaryBackground};
-border-radius: 8px;
-padding: 10px 10px;
-width: 80%;
-max-width: 630px;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-color: ${(props) => props.theme.colors.text}; 
-}
-MuiBackdrop-root {
-// background-color: rgba(0, 0, 0, 0.5);
-}
-align-items: center;
-}
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:80px;
+    font-family:${(props) => props.theme.fontFamily};
 `;
+
 const Card = styled.div`
 display:flex;
 flex-direction:column;
@@ -91,18 +74,17 @@ const Title = styled.h2`
 
 const Message = styled.p`
     font-size: 14px;
-    color: ${(props)=>props.theme.buttons.primaryBackground};
+    color: #555;
     margin: 10px 0;
-    font-weight:600;
     margin:0;
     padding:0;
 `;
 
-// const OrderID = styled.p`
-//     font-size: 14px;
-//     color: #000;
-//     font-weight: 600;
-// `;
+const OrderID = styled.p`
+    font-size: 14px;
+    color: #000;
+    font-weight: 600;
+`;
 
 const Button = styled.button`
     background: #1AAFD3;
