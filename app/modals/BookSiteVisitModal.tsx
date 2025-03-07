@@ -123,7 +123,7 @@ const BookSiteVisitModal: React.FC<BookSiteViewModalProps> = ({ open, onClose })
           </TimeSlotContainer> */}
           {showError &&
             <ErrorMessage>
-              One or more field(s) are missing
+              One or more required field(s) are missing
             </ErrorMessage>
           }
           <BookButton onClick={handleBook}>Book</BookButton>
