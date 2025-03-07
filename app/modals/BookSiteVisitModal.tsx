@@ -47,14 +47,14 @@ const BookSiteVisitModal: React.FC<BookSiteViewModalProps> = ({ open, onClose })
     }
   };
 
-  
+
   const handleClose = () => {
     setName("");
     setPhone("");
     setEmail("");
     setZipCode("");
     setAddress("");
-    setShowError(false); 
+    setShowError(false);
     onClose();
   };
 
@@ -63,10 +63,10 @@ const BookSiteVisitModal: React.FC<BookSiteViewModalProps> = ({ open, onClose })
       <div className="modal-content">
         <Header>
           <HeaderContainer>
-          <Title>Book Feasibility Test</Title>
-          <StyledCloseButton aria-label="close" onClick={handleClose}>
-            <StyledClose />
-          </StyledCloseButton>
+            <Title>Book Feasibility Test</Title>
+            <StyledCloseButton aria-label="close" onClick={handleClose}>
+              <StyledClose />
+            </StyledCloseButton>
           </HeaderContainer>
         </Header>
         <Body>
@@ -132,11 +132,17 @@ const BookSiteVisitModal: React.FC<BookSiteViewModalProps> = ({ open, onClose })
               </TimeSlotButton>
             ))}
           </TimeSlotContainer> */}
-          {showError &&
-            <ErrorMessage>
-              One or more required field(s) are missing
-            </ErrorMessage>
-          }
+
+          {showError && (
+            <ErrorContainer>
+              <StyledCloseBookButton>
+                <StyledCloseBook />
+              </StyledCloseBookButton>
+              <ErrorMessage>One or more required field(s) are missing</ErrorMessage>
+            </ErrorContainer>
+          )}
+
+
           <BookButton onClick={handleBook}>Book</BookButton>
         </Body>
       </div>
@@ -145,6 +151,7 @@ const BookSiteVisitModal: React.FC<BookSiteViewModalProps> = ({ open, onClose })
 };
 
 export default BookSiteVisitModal;
+
 
 
 const StyledModal = styled(Modal)`
@@ -181,7 +188,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   width: 81%;
   padding-bottom: .5rem;
-  border-bottom: 1px solid ${(props)=> props.theme.colors.lightBorder}
+  border-bottom: 1px solid ${(props) => props.theme.colors.lightBorder}
 `
 
 const Title = styled.p`
@@ -204,6 +211,46 @@ const StyledCloseButton = styled(IconButton)`
     height: 18px;
   }
 `;
+
+const ErrorContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+
+
+const StyledCloseBookButton = styled(IconButton)`
+  && {
+    padding: 0;
+    margin: 0;
+    margin-top: 1rem;
+    display: flex;
+    border: 1px solid #ca1407 !important;
+    background-color: #ca1407;
+    color: white;
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+    cursor: default;
+
+    &:hover {
+      background-color: #ca1407; 
+      color: white; 
+    }
+  }
+`;
+const StyledCloseBook = styled(Close)`
+  && {
+    padding: 0;
+    margin: 0;
+    font-size: 10px !important;
+
+    &:hover {
+      color: inherit; 
+    }
+  }
+`;
+
 
 const StyledClose = styled(Close)`
   && {
