@@ -169,7 +169,7 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 81%;
-  padding-bottom: 1rem;
+  padding-bottom: .5rem;
   border-bottom: 2px solid ${(props)=> props.theme.colors.lightBorder}
 `
 

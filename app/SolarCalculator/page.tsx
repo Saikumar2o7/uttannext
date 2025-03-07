@@ -27,6 +27,13 @@ const SolarCalculator = () => {
     const [systemSize, setSystemSize] = useState(1);
     const [solarInfo, setSolarInfo] = useState(solarData[0]);
     const [bookSiteVisitModal, setBooksiteVisit] = useState(false)
+    const [isClient, setIsClient] = useState(false);
+
+    
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -43,6 +50,7 @@ const SolarCalculator = () => {
             setSolarInfo(solarData[0]);
         }
     }, []);
+
 
     useEffect(() => {
         const matchedInfo = solarData.find((data) => data.bill === bill);
@@ -124,6 +132,11 @@ const SolarCalculator = () => {
     const handleCloseModal = () => {
         setBooksiteVisit(false)
     }
+
+    if(!isClient){
+        return null;
+    }
+    
     return (
         <>
             <Header />

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import styled, { useTheme } from "styled-components";
 import Header from "../components/Header/Header";
@@ -7,7 +7,7 @@ import HomeSecondSection from "./Home/SecondSection";
 import Footer from "../components/Header/Footer";
 import HomeThirdSection from "./Home/ThirdSection";
 import FAQSection from "./Home/FAQSection";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface StyledButtonProps {
@@ -16,11 +16,15 @@ interface StyledButtonProps {
     $textColor: string;
 }
 
-
 export default function HomePage() {
     const theme = useTheme();
     const router = useRouter();
     const thirdSectionRef = useRef<HTMLDivElement>(null);
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     const scrollToThirdSection = () => {
         if (thirdSectionRef.current) {
@@ -30,6 +34,10 @@ export default function HomePage() {
             });
         }
     };
+
+    if (!isClient) {
+        return null; 
+    }
 
     return (
         <>
@@ -54,7 +62,7 @@ export default function HomePage() {
                                 $backgroundColor={theme.buttons.primaryBackground}
                                 $borderColor={theme.buttons.primaryBackground}
                                 $textColor={theme.colors.primaryBackground}
-                                onClick={() => router.push('/Quotation')} 
+                                onClick={() => router.push('/Quotation')}
                             >
                                 Book Site Survey
                             </StyledButton>
@@ -145,4 +153,4 @@ const StyledButton = styled.button<StyledButtonProps>`
 
 const PText = styled.p`
   font-size: 1.1rem !important;
-`
+`;
