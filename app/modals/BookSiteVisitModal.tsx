@@ -47,13 +47,24 @@ const BookSiteVisitModal: React.FC<BookSiteViewModalProps> = ({ open, onClose })
     }
   };
 
+  
+  const handleClose = () => {
+    setName("");
+    setPhone("");
+    setEmail("");
+    setZipCode("");
+    setAddress("");
+    setShowError(false); 
+    onClose();
+  };
+
   return (
-    <StyledModal open={open} onClose={onClose}>
+    <StyledModal open={open} onClose={handleClose}>
       <div className="modal-content">
         <Header>
           <HeaderContainer>
           <Title>Book Feasibility Test</Title>
-          <StyledCloseButton aria-label="close" onClick={onClose}>
+          <StyledCloseButton aria-label="close" onClick={handleClose}>
             <StyledClose />
           </StyledCloseButton>
           </HeaderContainer>
