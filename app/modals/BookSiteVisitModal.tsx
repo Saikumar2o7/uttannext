@@ -170,7 +170,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   width: 81%;
   padding-bottom: .5rem;
-  border-bottom: 2px solid ${(props)=> props.theme.colors.lightBorder}
+  border-bottom: 1px solid ${(props)=> props.theme.colors.lightBorder}
 `
 
 const Title = styled.p`
