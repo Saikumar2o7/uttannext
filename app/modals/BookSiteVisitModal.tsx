@@ -352,7 +352,7 @@ const BookButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35%;
+  width: 37%;
   padding: 10px 20px;
   background: ${(props) => props.theme.buttons.secondaryBackground};
   color: white;
